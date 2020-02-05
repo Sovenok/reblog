@@ -50,12 +50,22 @@
         <li class="nav-item">
           <a class="nav-link" style="color:#FFB6C1" href="{{route('contacts')}}">Контакты</a>
         </li>
+
+          @if (\Auth::check ())
+            <li class="nav-item">
+              <a class="nav-link" style="color:#FFB6C1"
+                 href="{{route('admin_all')}}"> Администрирование </a>
+            </li>
+          @endif
+
         <li class="nav-item">
           <a class="nav-link" style="color:#FFB6C1"
              href="{{route('login')}}">@if (\Auth::check ()){{\Auth::user()->name}}
             @else Вход @endif</a>
 
         </li>
+
+
       </ul>
     </div>
   </div>

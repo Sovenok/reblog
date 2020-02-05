@@ -11,21 +11,42 @@
 |
 */
 
-
-Route::get('/', 'IndexController@Main')->name('home');
+Route::get('/', 'IndexController@Main')->name('index');
 
 Route::get('/about', 'PageController@About')->name('about');
 
 Route::get('/contacts', 'PageController@Contacts')->name('contacts');
 
-//Route::get('/author/{key}', '\\'.\Posts_by_authorController::class)->name('posts_by_author');
-//Route::get('/author/{key}', \App\Http\Controllers\PostsAuthorController::class);
+Route::get('/contacts', 'PageController@Contacts')->name('contacts');
 
-//Route::get('/contacts', 'PageController@Contacts')->name('contacts');
+Route::get('/author/{key}', Posts_by_authorController::class)->name('posts_by_author');
 
+Route::get('/category/{key}', Posts_by_categoryController::class)->name('posts_by_category');
 
-Route::get('/author/{key}', Posts_by_authorController::class)->name('post_by_author');
+Route::get('/post/{id}', SinglePostController::class)->name('single_post');
 
+Route::get('/admin/all', 'AdminAllController@all')->name('admin_all');
+
+Route::get('/admin/categories', 'AdminAllController@category')->name('admin_category');
+
+Route::get('/admin/add_post', 'Admin_postController@add')->name('add_post_get');
+
+Route::post('/admin/add_post', 'Admin_postController@save')->name('add_post_post');
+
+Route::get('/admin/edit_post/{id}', 'Admin_postController@edit')->name('edit_post_get');
+
+Route::post('/admin/edit_post/{id}', 'Admin_postController@edit_save')->name('edit_post_post');
+
+Route::get('/admin/delete_post', 'Admin_postController@delete')->name('delete_post_get');
+
+Route::delete('/admin/delete_post', 'Admin_postController@delete')->name('delete_post_get');
+
+Route::get('/send-mail',function (){
+    $mail=new \App\Mail\UserSubscribered();
+    $mail->subject='welcome to spam';
+    Mail::to('a.shvorobey@gmail.com')->send($mail);
+//    return view('welcome');
+});
 
 
 
